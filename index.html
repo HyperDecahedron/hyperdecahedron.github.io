@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Natalia Sempere | Mixed Reality and Robotics Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0912; --panel:#12101d; --line:#2a2540; --text:#d9d7e6; --muted:#8c88a6;
+  --cyan:#22e6ff; --pink:#ff2e8a; --link:#b8a4ff;
+  --head:"Chakra Petch","Segoe UI",sans-serif; --body:"IBM Plex Sans","Segoe UI",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.65;font-size:1rem}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+h1,h2,h3{font-family:var(--head);font-weight:700;line-height:1.2}
+.wrap{max-width:980px;margin:0 auto;padding:0 24px}
+
+/* Menu */
+header{position:sticky;top:0;z-index:10;background:rgba(10,9,18,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:56px}
+.brand{font-family:var(--head);font-weight:700;color:var(--text)}
+.menu{display:flex;gap:4px;list-style:none;overflow-x:auto}
+.menu a{display:block;padding:8px 12px;color:var(--muted);font-family:var(--head);font-weight:500;font-size:.95rem;border-bottom:2px solid transparent;white-space:nowrap}
+.menu a:hover,.menu a.active{color:var(--cyan);border-color:var(--cyan);text-decoration:none}
+
+/* Intro */
+.hero{padding:88px 0 72px;display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:center}
+.photo{position:relative;aspect-ratio:4/5;background:var(--panel);border:1px solid var(--cyan);
+  clip-path:polygon(0 0,calc(100% - 28px) 0,100% 28px,100% 100%,28px 100%,0 calc(100% - 28px))}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.hero h1{font-size:clamp(2.2rem,5vw,3.4rem);margin-bottom:8px}
+.glitch{animation:glitch .7s steps(2,end) 1}
+@keyframes glitch{
+  0%{text-shadow:3px 0 var(--pink),-3px 0 var(--cyan);transform:translateX(-2px)}
+  40%{text-shadow:-3px 0 var(--pink),3px 0 var(--cyan);transform:translateX(2px)}
+  100%{text-shadow:none;transform:none}}
+.role{font-family:var(--head);color:var(--cyan);font-size:1.15rem;margin-bottom:20px}
+.hero p{max-width:60ch;color:var(--text);margin-bottom:14px}
+.links{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.btn{display:inline-block;padding:9px 18px;border:1px solid var(--cyan);color:var(--cyan);font-family:var(--head);font-weight:500}
+.btn:hover{background:var(--cyan);color:var(--bg);text-decoration:none}
+
+/* Banner */
+.banner{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.banner img{display:block;width:100%;height:clamp(160px,28vw,340px);object-fit:cover}
+
+/* Sections */
+section{padding:72px 0;border-top:1px solid var(--line)}
+section>.wrap>h2{font-size:1.9rem;margin-bottom:28px;padding-left:14px;border-left:3px solid var(--pink)}
+h3{font-size:1.2rem;margin:34px 0 14px;color:var(--cyan)}
+h3:first-of-type{margin-top:0}
+
+/* Tabs and cards */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.tab{background:none;border:1px solid var(--line);color:var(--muted);padding:8px 16px;font-family:var(--head);font-weight:500;font-size:.95rem;cursor:pointer}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab[aria-selected="true"]{color:var(--bg);background:var(--cyan);border-color:var(--cyan)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.card{background:var(--panel);border:1px solid var(--line);padding:22px;transition:border-color .2s}
+.card:hover{border-color:var(--cyan)}
+.card h4{font-family:var(--head);font-size:1.1rem;margin-bottom:6px}
+.card p{color:var(--muted);font-size:.95rem}
+.card .meta{color:var(--pink);font-size:.85rem;margin-bottom:10px}
+.panel[hidden]{display:none}
+
+/* Entries (experience, education, publications, awards) */
+.entry{padding:18px 0 18px 20px;border-left:1px solid var(--line);position:relative}
+.entry::before{content:"";position:absolute;left:-4px;top:26px;width:7px;height:7px;background:var(--pink)}
+.entry h4{font-family:var(--head);font-size:1.1rem}
+.entry .meta{color:var(--muted);font-size:.9rem;margin-bottom:6px}
+.entry p{max-width:70ch}
+.pubs{list-style:none}
+.pubs li{padding:16px 0;border-bottom:1px solid var(--line);max-width:80ch}
+.pubs .venue{color:var(--muted);font-size:.9rem}
+
+/* Experience layout */
+.split{display:grid;grid-template-columns:1fr 360px;gap:40px;align-items:start}
+.split figure{position:sticky;top:80px}
+.split figure img{display:block;width:100%;border:1px solid var(--line)}
+.split figcaption{color:var(--muted);font-size:.9rem;margin-top:10px}
+.entry ul{margin:10px 0 0 18px;max-width:70ch}
+.entry li{margin-bottom:6px}
+.entry li strong{color:var(--text)}
+@media(max-width:760px){.split{grid-template-columns:1fr;gap:20px}.split figure{position:static;order:2}}
+
+/* Project cards with media carousel */
+.card.project{grid-column:1/-1;display:grid;grid-template-columns:1.25fr 1fr;gap:32px;align-items:center;padding:20px}
+.card.project h4{font-size:1.4rem;margin-bottom:12px}
+.card.project p{color:var(--text);font-size:1rem}
+.card.project ul:not(.tags){margin:10px 0 0 18px;color:var(--text)}
+.card.project ul:not(.tags) li{margin-bottom:4px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin-top:16px}
+.tags li{border:1px solid var(--line);color:var(--muted);padding:2px 10px;font-size:.85rem}
+.proj-links{margin-top:18px;font-size:.95rem !important;color:var(--muted) !important}
+.carousel{position:relative;aspect-ratio:16/10;background:#05040a;border:1px solid var(--line);overflow:hidden}
+.carousel .slide{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:none}
+.carousel .slide.on{display:block}
+.car-btn{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;background:rgba(10,9,18,.75);border:1px solid var(--cyan);color:var(--cyan);font-size:1.4rem;line-height:1;cursor:pointer;z-index:2}
+.car-btn:hover{background:var(--cyan);color:var(--bg)}
+.car-prev{left:10px}.car-next{right:10px}
+.car-count{position:absolute;right:10px;bottom:8px;background:rgba(10,9,18,.75);color:var(--muted);font-size:.8rem;padding:2px 8px;z-index:2}
+.carousel.single .car-btn,.carousel.single .car-count{display:none}
+@media(max-width:760px){.card.project{grid-template-columns:1fr;gap:20px}}
+
+/* Closing video */
+.outro{padding:56px 0}
+.outro .wrap{display:flex;justify-content:center}
+.outro video{display:block;width:100%;max-width:420px;border:1px solid var(--line);background:#05040a}
+
+/* CV */
+.cv-frame{width:100%;height:80vh;min-height:480px;border:1px solid var(--line);background:var(--panel)}
+footer{padding:40px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+
+@media(max-width:760px){
+  .hero{grid-template-columns:1fr;padding-top:56px}
+  .photo{max-width:220px}
+  .brand{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav aria-label="Main">
+      <a class="brand" href="#top">Natalia Sempere</a>
+      <ul class="menu">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#awards">Awards</a></li>
+        <li><a href="#cv">CV</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- INTRO -->
+  <div class="wrap hero">
+    <div class="photo">
+      <!-- Put your photo at images/profile.jpg -->
+      <img src="images/profile.jpg" alt="Portrait of Natalia Sempere" onerror="this.remove()">
+    </div>
+    <div>
+      <h1 class="glitch">Natalia Sempere</h1>
+      <p class="role">Mixed Reality and Robotics Engineer</p>
+      <p>I like developing end-to-end HCI projects, from building the virtual environment to integrating the hardware.</p>
+      <p>Most of my work has involved some kind of Mixed Reality. I've worked with Meta Quest and HoloLens, but I also have experience with robot programming, machine learning, UX design and user testing.</p>
+      <p>I have research experience across multiple universities and laboratories, including KTH Royal Institute of Technology, the University of Alicante, and the University of Skövde.</p>
+      <p><a href="mailto:semperenatalia@gmail.com">semperenatalia@gmail.com</a></p>
+      <div class="links">
+        <a class="btn" href="#projects">See my projects</a>
+        <a class="btn" href="https://www.linkedin.com/in/natalia-sempere-macia" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="#cv">CV</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BANNER: put your image at images/banner2.png -->
+  <div class="banner">
+    <img src="images/banner2.png" alt="Banner" onerror="this.parentElement.remove()">
+  </div>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <h2>Projects</h2>
+      <div class="tabs" role="tablist" aria-label="Project categories">
+        <button class="tab" role="tab" aria-selected="true" data-target="p-mr">Mixed Reality</button>
+        <button class="tab" role="tab" aria-selected="false" data-target="p-robotics">Robotics</button>
+        <button class="tab" role="tab" aria-selected="false" data-target="p-biosignals">Biosignals</button>
+        <button class="tab" role="tab" aria-selected="false" data-target="p-ai">AI/Machine learning</button>
+        <button class="tab" role="tab" aria-selected="false" data-target="p-design">UX Design</button>
+      </div>
+
+      <div class="panel" id="p-mr">
+        <div class="grid">
+          <article class="card project">
+            <div class="carousel" tabindex="0" aria-label="MicroVRide media">
+              <video class="slide" src="microvride/clip1.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <video class="slide" src="microvride/clip2.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <img class="slide" src="microvride/fan1.JPG" alt="Airflow accessory for the Meta Quest 2" loading="lazy">
+              <img class="slide" src="microvride/fan2.JPG" alt="Airflow accessory for the Meta Quest 2, second view" loading="lazy">
+              <button class="car-btn car-prev" aria-label="Previous">&#8249;</button>
+              <button class="car-btn car-next" aria-label="Next">&#8250;</button>
+              <span class="car-count"></span>
+            </div>
+            <div>
+              <h4>MicroVRide: the 4-in-1 simulator</h4>
+              <p>I worked on a VR micromobility simulator that supports four different vehicles. I developed two cybersickness mitigation techniques: an airflow accessory for the Meta Quest 2 and a virtual helmet.</p>
+              <ul class="tags"><li>VR</li><li>Cybersickness</li><li>3D modelling</li><li>Micromobility vehicles</li></ul>
+            </div>
+          </article>
+          <article class="card project">
+            <div class="carousel" tabindex="0" aria-label="MR Robot programming media">
+              <video class="slide" src="mr_robot_programming/robot.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <img class="slide" src="mr_robot_programming/robot.png" alt="Mixed Reality view of the ABB robot" loading="lazy">
+              <img class="slide" src="mr_robot_programming/target.jpg" alt="Robot target positions in Mixed Reality" loading="lazy">
+              <img class="slide" src="mr_robot_programming/assembly.png" alt="Assembly setup with the ABB robot" loading="lazy">
+              <button class="car-btn car-prev" aria-label="Previous">&#8249;</button>
+              <button class="car-btn car-next" aria-label="Next">&#8250;</button>
+              <span class="car-count"></span>
+            </div>
+            <div>
+              <h4>MR Robot programming</h4>
+              <p>I developed a Mixed Reality digital shadow to program an ABB collaborative robot. It lets users preview the robot's path, execute the movements on the physical robot, and detect potential collisions in advance.</p>
+              <ul class="tags"><li>HoloLens</li><li>ABB</li><li>RobotStudio</li></ul>
+              <p class="proj-links">See the full videos:<br><a href="https://www.youtube.com/watch?v=dbKnTSKSqV0" target="_blank" rel="noopener">Mixed Reality for Robot Programming 2</a><br><a href="https://www.youtube.com/watch?v=eaKuhZkZeE0&amp;t=1s" target="_blank" rel="noopener">New Features - Mixed Reality Robot Studio</a></p>
+            </div>
+          </article>
+          <article class="card project">
+            <div class="carousel" tabindex="0" aria-label="MR Robot safety configurator media">
+              <video class="slide" src="mr_safety/video1.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <video class="slide" src="mr_safety/video2.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <video class="slide" src="mr_safety/video3.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <img class="slide" src="mr_safety/image1.jpg" alt="Robot safety zones in Mixed Reality" loading="lazy">
+              <button class="car-btn car-prev" aria-label="Previous">&#8249;</button>
+              <button class="car-btn car-next" aria-label="Next">&#8250;</button>
+              <span class="car-count"></span>
+            </div>
+            <div>
+              <h4>MR Robot safety configurator</h4>
+              <p>I developed an MR app to visualise and edit a robot's safety zones. The zones act as virtual sensors that detect when someone enters the station and immediately halt the physical robot.</p>
+              <ul class="tags"><li>Safety</li><li>HoloLens</li><li>ABB</li><li>RobotStudio</li></ul>
+              <p class="proj-links">See the full video:<br><a href="https://www.youtube.com/watch?v=7OfGL1vI12k&amp;t=2s" target="_blank" rel="noopener">Safety manager - Mixed Reality Robot Studio</a></p>
+            </div>
+          </article>
+          <article class="card project">
+            <div class="carousel" tabindex="0" aria-label="AR Assembly training media">
+              <video class="slide" src="ar_assembly/video1.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <img class="slide" src="images/testing_scania.png" alt="Testing the AR assembly training app at Skandia Elevator" loading="lazy">
+              <button class="car-btn car-prev" aria-label="Previous">&#8249;</button>
+              <button class="car-btn car-next" aria-label="Next">&#8250;</button>
+              <span class="car-count"></span>
+            </div>
+            <div>
+              <h4>AR Assembly training</h4>
+              <p>I developed an AR app to train operators at Skandia Elevator on a piece assembly process. It was later tested in the factory.</p>
+              <ul class="tags"><li>AR</li><li>HoloLens</li><li>Operator training</li></ul>
+              <p class="proj-links">See the full video:<br><a href="https://www.youtube.com/watch?v=J2OwIPxz1mk" target="_blank" rel="noopener">MR Assembly</a></p>
+            </div>
+          </article>
+          <article class="card project">
+            <div class="carousel" tabindex="0" aria-label="Pancoholic media">
+              <video class="slide" src="pancoholic/video1.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <img class="slide" src="pancoholic/image1.png" alt="Pancoholic VR pancake simulator" loading="lazy">
+              <img class="slide" src="pancoholic/image2.jpg" alt="Pancoholic VR pancake simulator, second view" loading="lazy">
+              <button class="car-btn car-prev" aria-label="Previous">&#8249;</button>
+              <button class="car-btn car-next" aria-label="Next">&#8250;</button>
+              <span class="car-count"></span>
+            </div>
+            <div>
+              <h4>Pancoholic: a VR pancake simulator</h4>
+              <p>I developed a VR pancake-flipping simulator as part of a team, using a real tracked pan to replicate realistic flipping motion. My contributions included:</p>
+              <ul>
+                <li>Designing the VR environment and UI</li>
+                <li>Programming the game logic and UI</li>
+                <li>Designing and implementing particle systems</li>
+                <li>Building a food ordering system integrated with a website</li>
+              </ul>
+              <ul class="tags"><li>VR</li><li>Meta Quest 2</li></ul>
+              <p class="proj-links">More information:<br><a href="https://pancoholic.vercel.app/" target="_blank" rel="noopener">Pancoholic</a></p>
+            </div>
+          </article>
+          <article class="card project">
+            <div class="carousel" tabindex="0" aria-label="TonguePlay media">
+              <img class="slide" src="tongue_play/image1.JPG" alt="TonguePlay EMG sensors under the chin" loading="lazy">
+              <img class="slide" src="tongue_play/image2.png" alt="TonguePlay, second view" loading="lazy">
+              <img class="slide" src="tongue_play/image3.png" alt="TonguePlay, third view" loading="lazy">
+              <button class="car-btn car-prev" aria-label="Previous">&#8249;</button>
+              <button class="car-btn car-next" aria-label="Next">&#8250;</button>
+              <span class="car-count"></span>
+            </div>
+            <div>
+              <h4>TonguePlay</h4>
+              <p>I developed a novel tongue-based input for VR using EMG sensors under the chin. The model predicts the tongue position (left, front, or right) and pressure (0 to 100). With it, users play two VR games using their tongue.</p>
+              <ul class="tags"><li>VR</li><li>EMG</li><li>Random Forest Regressor</li><li>OpenBCI</li></ul>
+              <p class="proj-links">Read the paper:<br><a href="https://dl.acm.org/doi/10.1145/3831314" target="_blank" rel="noopener">TonguePlay: Non-invasive Tongue Pressure Input for Gaming</a></p>
+            </div>
+          </article>
+          <article class="card project">
+            <div class="carousel" tabindex="0" aria-label="Smart Room media">
+              <img class="slide" src="smart_room/image1.png" alt="Smart Room, a VR room controlled with the tongue" loading="lazy">
+              <img class="slide" src="smart_room/image2.png" alt="Smart Room, second view" loading="lazy">
+              <button class="car-btn car-prev" aria-label="Previous">&#8249;</button>
+              <button class="car-btn car-next" aria-label="Next">&#8250;</button>
+              <span class="car-count"></span>
+            </div>
+            <div>
+              <h4>Smart Room</h4>
+              <p>I expanded the machine learning model of TonguePlay to develop a VR smart room where users can interact with different parts of it using only their tongue. This was part of an accessibility project (T-Press) with UoM and AUTH.</p>
+              <ul class="tags"><li>VR</li><li>Meta Quest 2</li><li>EMG</li></ul>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="panel" id="p-robotics" hidden>
+        <div class="grid">
+          <article class="card project">
+            <div class="carousel" tabindex="0" aria-label="MR Robot programming media">
+              <video class="slide" src="mr_robot_programming/robot.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <img class="slide" src="mr_robot_programming/robot.png" alt="Mixed Reality view of the ABB robot" loading="lazy">
+              <img class="slide" src="mr_robot_programming/target.jpg" alt="Robot target positions in Mixed Reality" loading="lazy">
+              <img class="slide" src="mr_robot_programming/assembly.png" alt="Assembly setup with the ABB robot" loading="lazy">
+              <button class="car-btn car-prev" aria-label="Previous">&#8249;</button>
+              <button class="car-btn car-next" aria-label="Next">&#8250;</button>
+              <span class="car-count"></span>
+            </div>
+            <div>
+              <h4>MR Robot programming</h4>
+              <p>I developed a Mixed Reality digital shadow to program an ABB collaborative robot. It lets users preview the robot's path, execute the movements on the physical robot, and detect potential collisions in advance.</p>
+              <ul class="tags"><li>HoloLens</li><li>ABB</li><li>RobotStudio</li></ul>
+              <p class="proj-links">See the full videos:<br><a href="https://www.youtube.com/watch?v=dbKnTSKSqV0" target="_blank" rel="noopener">Mixed Reality for Robot Programming 2</a><br><a href="https://www.youtube.com/watch?v=eaKuhZkZeE0&amp;t=1s" target="_blank" rel="noopener">New Features - Mixed Reality Robot Studio</a></p>
+            </div>
+          </article>
+          <article class="card project">
+            <div class="carousel" tabindex="0" aria-label="MR Robot safety configurator media">
+              <video class="slide" src="mr_safety/video1.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <video class="slide" src="mr_safety/video2.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <video class="slide" src="mr_safety/video3.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <img class="slide" src="mr_safety/image1.jpg" alt="Robot safety zones in Mixed Reality" loading="lazy">
+              <button class="car-btn car-prev" aria-label="Previous">&#8249;</button>
+              <button class="car-btn car-next" aria-label="Next">&#8250;</button>
+              <span class="car-count"></span>
+            </div>
+            <div>
+              <h4>MR Robot safety configurator</h4>
+              <p>I developed an MR app to visualise and edit a robot's safety zones. The zones act as virtual sensors that detect when someone enters the station and immediately halt the physical robot.</p>
+              <ul class="tags"><li>Safety</li><li>HoloLens</li><li>ABB</li><li>RobotStudio</li></ul>
+              <p class="proj-links">See the full video:<br><a href="https://www.youtube.com/watch?v=7OfGL1vI12k&amp;t=2s" target="_blank" rel="noopener">Safety manager - Mixed Reality Robot Studio</a></p>
+            </div>
+          </article>
+          <article class="card project">
+            <div class="carousel" tabindex="0" aria-label="Rehabilitation framework media">
+              <video class="slide" src="rehabilitation/video1.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <video class="slide" src="rehabilitation/video2.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <video class="slide" src="rehabilitation/video3.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <img class="slide" src="rehabilitation/image1.png" alt="Robotic gamified framework for upper-limb rehabilitation" loading="lazy">
+              <button class="car-btn car-prev" aria-label="Previous">&#8249;</button>
+              <button class="car-btn car-next" aria-label="Next">&#8250;</button>
+              <span class="car-count"></span>
+            </div>
+            <div>
+              <h4>Robotic gamified framework for upper-limb rehabilitation</h4>
+              <p>I developed a robotic gamified framework for upper-limb rehabilitation using ROS, Unity and EMG. It was tested with a real post-stroke patient for a month and presented at the Simposio de Robótica, Bioingeniería y Visión por Computador 2024.</p>
+              <ul class="tags"><li>Unity</li><li>EMG</li><li>UR10e</li></ul>
+              <p class="proj-links">Read the paper:<br><a href="https://www.mdpi.com/2076-3417/15/20/11007" target="_blank" rel="noopener">A Robotic Gamified Framework for Upper-Limb Rehabilitation</a></p>
+            </div>
+          </article>
+          <article class="card project">
+            <div class="carousel" tabindex="0" aria-label="Furhat trust study media">
+              <video class="slide" src="furhat/video1.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <video class="slide" src="furhat/video2.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <button class="car-btn car-prev" aria-label="Previous">&#8249;</button>
+              <button class="car-btn car-next" aria-label="Next">&#8250;</button>
+              <span class="car-count"></span>
+            </div>
+            <div>
+              <h4>A trust study on the Furhat robot microexpressions</h4>
+              <p>As part of a group project, I programmed a Furhat robot and conducted a user study to evaluate how its microexpressions influence people's social perception of it while playing a game.</p>
+              <ul class="tags"><li>Furhat</li><li>Robot programming</li></ul>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="panel" id="p-biosignals" hidden>
+        <div class="grid">
+          <article class="card project">
+            <div class="carousel" tabindex="0" aria-label="TonguePlay media">
+              <img class="slide" src="tongue_play/image1.JPG" alt="TonguePlay EMG sensors under the chin" loading="lazy">
+              <img class="slide" src="tongue_play/image2.png" alt="TonguePlay, second view" loading="lazy">
+              <img class="slide" src="tongue_play/image3.png" alt="TonguePlay, third view" loading="lazy">
+              <button class="car-btn car-prev" aria-label="Previous">&#8249;</button>
+              <button class="car-btn car-next" aria-label="Next">&#8250;</button>
+              <span class="car-count"></span>
+            </div>
+            <div>
+              <h4>TonguePlay</h4>
+              <p>I developed a novel tongue-based input for VR using EMG sensors under the chin. The model predicts the tongue position (left, front, or right) and pressure (0 to 100). With it, users play two VR games using their tongue.</p>
+              <ul class="tags"><li>VR</li><li>EMG</li><li>Random Forest Regressor</li><li>OpenBCI</li></ul>
+              <p class="proj-links">Read the paper:<br><a href="https://dl.acm.org/doi/10.1145/3831314" target="_blank" rel="noopener">TonguePlay: Non-invasive Tongue Pressure Input for Gaming</a></p>
+            </div>
+          </article>
+          <article class="card project">
+            <div class="carousel" tabindex="0" aria-label="Smart Room media">
+              <img class="slide" src="smart_room/image1.png" alt="Smart Room, a VR room controlled with the tongue" loading="lazy">
+              <img class="slide" src="smart_room/image2.png" alt="Smart Room, second view" loading="lazy">
+              <button class="car-btn car-prev" aria-label="Previous">&#8249;</button>
+              <button class="car-btn car-next" aria-label="Next">&#8250;</button>
+              <span class="car-count"></span>
+            </div>
+            <div>
+              <h4>Smart Room</h4>
+              <p>I expanded the machine learning model of TonguePlay to develop a VR smart room where users can interact with different parts of it using only their tongue. This was part of an accessibility project (T-Press) with UoM and AUTH.</p>
+              <ul class="tags"><li>VR</li><li>Meta Quest 2</li><li>EMG</li></ul>
+            </div>
+          </article>
+          <article class="card project">
+            <div class="carousel" tabindex="0" aria-label="Rehabilitation framework media">
+              <video class="slide" src="rehabilitation/video1.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <video class="slide" src="rehabilitation/video2.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <video class="slide" src="rehabilitation/video3.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <img class="slide" src="rehabilitation/image1.png" alt="Robotic gamified framework for upper-limb rehabilitation" loading="lazy">
+              <button class="car-btn car-prev" aria-label="Previous">&#8249;</button>
+              <button class="car-btn car-next" aria-label="Next">&#8250;</button>
+              <span class="car-count"></span>
+            </div>
+            <div>
+              <h4>Robotic gamified framework for upper-limb rehabilitation</h4>
+              <p>I developed a robotic gamified framework for upper-limb rehabilitation using ROS, Unity and EMG. It was tested with a real post-stroke patient for a month and presented at the Simposio de Robótica, Bioingeniería y Visión por Computador 2024.</p>
+              <ul class="tags"><li>Unity</li><li>EMG</li><li>UR10e</li></ul>
+              <p class="proj-links">Read the paper:<br><a href="https://www.mdpi.com/2076-3417/15/20/11007" target="_blank" rel="noopener">A Robotic Gamified Framework for Upper-Limb Rehabilitation</a></p>
+            </div>
+          </article>
+          <article class="card project">
+            <div class="carousel" tabindex="0" aria-label="Sounds for Nap media">
+              <img class="slide" src="sounds_nap/image1.jpg" alt="EEG testing for the Sounds for Nap study" loading="lazy">
+              <button class="car-btn car-prev" aria-label="Previous">&#8249;</button>
+              <button class="car-btn car-next" aria-label="Next">&#8250;</button>
+              <span class="car-count"></span>
+            </div>
+            <div>
+              <h4>Sounds for Nap</h4>
+              <p>I conducted EEG tests with different sounds to study brain activity during sleep, with more than 50 hours of user testing.</p>
+              <ul class="tags"><li>EEG</li><li>User testing</li></ul>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="panel" id="p-ai" hidden>
+        <div class="grid">
+          <article class="card project">
+            <div class="carousel" tabindex="0" aria-label="TonguePlay media">
+              <img class="slide" src="tongue_play/image1.JPG" alt="TonguePlay EMG sensors under the chin" loading="lazy">
+              <img class="slide" src="tongue_play/image2.png" alt="TonguePlay, second view" loading="lazy">
+              <img class="slide" src="tongue_play/image3.png" alt="TonguePlay, third view" loading="lazy">
+              <button class="car-btn car-prev" aria-label="Previous">&#8249;</button>
+              <button class="car-btn car-next" aria-label="Next">&#8250;</button>
+              <span class="car-count"></span>
+            </div>
+            <div>
+              <h4>TonguePlay</h4>
+              <p>I developed a novel tongue-based input for VR using EMG sensors under the chin. The model predicts the tongue position (left, front, or right) and pressure (0 to 100). With it, users play two VR games using their tongue.</p>
+              <ul class="tags"><li>VR</li><li>EMG</li><li>Random Forest Regressor</li><li>OpenBCI</li></ul>
+              <p class="proj-links">Read the paper:<br><a href="https://dl.acm.org/doi/10.1145/3831314" target="_blank" rel="noopener">TonguePlay: Non-invasive Tongue Pressure Input for Gaming</a></p>
+            </div>
+          </article>
+          <article class="card project">
+            <div class="carousel" tabindex="0" aria-label="Generative AI on sounds and images media">
+              <img class="slide" src="gen_ai/image1.png" alt="Generative AI image created from music" loading="lazy">
+              <img class="slide" src="gen_ai/image2.png" alt="Generative AI image created from music, second example" loading="lazy">
+              <button class="car-btn car-prev" aria-label="Previous">&#8249;</button>
+              <button class="car-btn car-next" aria-label="Next">&#8250;</button>
+              <span class="car-count"></span>
+            </div>
+            <div>
+              <h4>Generative AI on sounds and images</h4>
+              <p>As part of a group project, we explored how generative AI can create visual representations of music. I programmed the pipeline to extract audio features and generate the images.</p>
+              <ul class="tags"><li>GenAI</li><li>Sounds</li></ul>
+            </div>
+          </article>
+          <article class="card project">
+            <div class="carousel" tabindex="0" aria-label="Olympic vs Paralympic big data analysis media">
+              <img class="slide" src="big_data/image1.png" alt="Olympic vs Paralympic public opinion analysis" loading="lazy">
+              <img class="slide" src="big_data/image2.png" alt="Olympic vs Paralympic public opinion analysis, second view" loading="lazy">
+              <button class="car-btn car-prev" aria-label="Previous">&#8249;</button>
+              <button class="car-btn car-next" aria-label="Next">&#8250;</button>
+              <span class="car-count"></span>
+            </div>
+            <div>
+              <h4>Olympic vs Paralympic Public Opinion: A Big Data Analysis</h4>
+              <p>As part of a group project, we investigated the presence of social bullying directed at Olympic and Paralympic athletes on online platforms. I was in charge of collecting data from YouTube, and then used Google's Perspective API, VADER, TextBlob, and OpenAI's ChatGPT models to classify comments by sentiment and toxicity.</p>
+              <ul class="tags"><li>Big Data</li><li>Paralympics</li></ul>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="panel" id="p-design" hidden>
+        <div class="grid">
+          <article class="card project">
+            <div class="carousel" tabindex="0" aria-label="AR Robotic training pet media">
+              <video class="slide" src="ar_training_pet/video1.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <video class="slide" src="ar_training_pet/video2.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <video class="slide" src="ar_training_pet/video3.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <button class="car-btn car-prev" aria-label="Previous">&#8249;</button>
+              <button class="car-btn car-next" aria-label="Next">&#8250;</button>
+              <span class="car-count"></span>
+            </div>
+            <div>
+              <h4>AR Robotic training pet</h4>
+              <p>I developed an AR app as a tutorial to teach how to use AR buttons and tools. For this project, I animated a robotic pet in Adobe After Effects, integrated it into the app, and edited a promotional video.</p>
+              <ul class="tags"><li>AR</li><li>Animation</li><li>Video editing</li></ul>
+            </div>
+          </article>
+          <article class="card project">
+            <div class="carousel" tabindex="0" aria-label="Poppy Town media">
+              <video class="slide" src="poppy_town/video1.mp4#t=0.1" loop muted playsinline preload="auto"></video>
+              <img class="slide" src="poppy_town/image1.png" alt="Poppy Town pixel art game, screenshot 1" loading="lazy">
+              <img class="slide" src="poppy_town/image2.png" alt="Poppy Town pixel art game, screenshot 2" loading="lazy">
+              <img class="slide" src="poppy_town/image3.png" alt="Poppy Town pixel art game, screenshot 3" loading="lazy">
+              <img class="slide" src="poppy_town/image5.png" alt="Poppy Town pixel art game, screenshot 4" loading="lazy">
+              <img class="slide" src="poppy_town/image6.png" alt="Poppy Town pixel art game, screenshot 5" loading="lazy">
+              <img class="slide" src="poppy_town/image7.png" alt="Poppy Town pixel art game, screenshot 6" loading="lazy">
+              <img class="slide" src="poppy_town/image8.png" alt="Poppy Town pixel art game, screenshot 7" loading="lazy">
+              <button class="car-btn car-prev" aria-label="Previous">&#8249;</button>
+              <button class="car-btn car-next" aria-label="Next">&#8250;</button>
+              <span class="car-count"></span>
+            </div>
+            <div>
+              <h4>Poppy Town</h4>
+              <p>This is one of the projects I'm proudest of! As part of a group project at KTH, I worked really hard to develop a demo of a pixel art game. It was my first time developing a game, and I was in charge of programming it in Unity, designing the characters and the UI, creating the animations and VFX, and integrating the sounds. I put a lot of effort into this project.</p>
+              <ul class="tags"><li>Pixel art</li><li>Unity</li><li>2D game</li></ul>
+              <p class="proj-links">Play the game:<br><a href="https://hyper-nat.itch.io/poppy-town" target="_blank" rel="noopener">Poppy Town by Hyper_Nat</a></p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="wrap">
+      <h2>Experience</h2>
+
+      <h3>Research experience</h3>
+      <div class="split">
+        <div>
+          <div class="entry">
+            <h4>Researcher at KTH Royal Institute of Technology</h4>
+            <div class="meta">June 2025 – July 2026</div>
+            <p>This position started as a summer internship and got extended into several projects. In this position I specialised in VR experiences.</p>
+            <p>Projects: MicroVRide, TonguePlay, Sounds For Nap, and T-Press.</p>
+          </div>
+          <div class="entry">
+            <h4>MR developer with ABB (Västerås, Sweden)</h4>
+            <div class="meta">September 2024 – October 2024</div>
+            <p>Employed by ASSAR, I prepared an MR robot programming and safety visualisation demo in collaboration with ABB. Presented a real-time demo to Daimler Trucks.</p>
+          </div>
+          <div class="entry">
+            <h4>Researcher in Human Robotics (Alicante, Spain)</h4>
+            <div class="meta">January 2024 – July 2024</div>
+            <p>Developed a robotic gamified framework for upper limb rehabilitation using ROS, Unity and EMG. Tested in a real post-stroke patient during a month. Presented in the Simposio de Robótica, Bioingeniería y Visión por Computador 2024.</p>
+          </div>
+          <div class="entry">
+            <h4>Researcher in ASSAR (Skövde, Sweden)</h4>
+            <div class="meta">June 2022 – August 2023</div>
+            <p>Employed as a continuation of my bachelor thesis. Development of a MR digital twin for robot programming and safety in collaboration with ABB and Skandia Elevator. AR application for manual assembly training. Tested on Skandia Elevator's manufacturing line. Produced educational videos on MR topics. Presentation of 3 scientific papers in the CIRP ICME conference in Naples 2023.</p>
+          </div>
+        </div>
+        <figure>
+          <img src="images/testing_scania.png" alt="Testing an AR app for assembly training at Skandia Elevator" onerror="this.closest('figure').remove()">
+          <figcaption>Showcasing an AR app for assembly training at Skandia Elevator. I'm to the right!</figcaption>
+        </figure>
+      </div>
+
+      <h3>Volunteering</h3>
+      <div class="split">
+        <div>
+          <div class="entry">
+            <h4>Quiero ser ingeniera</h4>
+            <div class="meta">March 2024</div>
+            <p>Presentation of interactive robotic demos with the NAO robot at the University of Alicante.</p>
+          </div>
+          <div class="entry">
+            <h4>Judge in the Spanish National FIRST LEGO League Final</h4>
+            <div class="meta">March 2024</div>
+          </div>
+          <div class="entry">
+            <h4>Community manager and Room coordinator of the FIRST LEGO League</h4>
+            <div class="meta">January 2021 – May 2021</div>
+          </div>
+          <div class="entry">
+            <h4>Secretary of the DEEPSUA</h4>
+            <div class="meta">July 2020 – May 2021</div>
+          </div>
+        </div>
+        <figure>
+          <img src="images/fll.jpeg" alt="Managing the online FLL tournament during the COVID pandemic" onerror="this.closest('figure').remove()">
+          <figcaption>I'm here managing the online FLL tournament during the COVID pandemic.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="wrap">
+      <h2>Education</h2>
+      <h3>Degrees and MSc</h3>
+      <div class="entry"><h4>MSc in Interactive Media Technology, KTH Royal Institute of Technology</h4><div class="meta">2024 – 2026</div></div>
+      <div class="entry"><h4>Robotics Engineering, University of Alicante</h4><div class="meta">2019 – 2024</div><p>GPA: 9.38 / 10. Award for the Best Academic Record in Robotics Engineering.</p></div>
+      <div class="entry"><h4>Industrial Engineering, University of Skövde</h4><div class="meta">2020 – 2022</div></div>
+      <h3>Courses</h3>
+      <div class="entry"><h4>The Beginner's Guide to DaVinci Resolve 20</h4></div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="wrap">
+      <h2>Publications</h2>
+
+      <h3>VR experiences</h3>
+      <ul class="pubs">
+        <li><a href="https://dl.acm.org/doi/10.1145/3831314" target="_blank" rel="noopener"><strong>TonguePlay: Non-invasive Tongue Pressure Input for Gaming</strong></a><br><span class="venue">Proceedings of the ACM on Human-Computer Interaction · 3 November 2026</span></li>
+        <li><a href="https://dl.acm.org/doi/full/10.1145/3772363.3798943" target="_blank" rel="noopener"><strong>MicroVRide: Exploring 4-in-1 Virtual Reality Micromobility Simulator</strong></a><br><span class="venue">Extended Abstracts of the 2026 CHI Conference on Human Factors in Computing Systems (CHI EA 2026) · 13 April 2026</span></li>
+      </ul>
+
+      <h3>Rehabilitation robotics</h3>
+      <ul class="pubs">
+        <li><a href="https://www.mdpi.com/2076-3417/15/20/11007" target="_blank" rel="noopener"><strong>A Robotic Gamified Framework for Upper-Limb Rehabilitation</strong></a><br><span class="venue">Special Issue: Novel Approaches of Physical Therapy-Based Rehabilitation · 14 October 2025</span></li>
+        <li><a href="https://link.springer.com/chapter/10.1007/978-3-031-77584-0_86" target="_blank" rel="noopener"><strong>Upper Limb EMG-Based Fatigue Estimation During End Effector Robot-Assisted Activities</strong></a><br><span class="venue">Biosystems &amp; Biorobotics (BIOSYSROB, volume 32) · 21 December 2024</span></li>
+        <li><a href="https://dehesa.unex.es:8443/handle/10662/21260" target="_blank" rel="noopener"><strong>Framework para rehabilitación gamificada con robots de efector final</strong></a><br><span class="venue">Universidad de Extremadura, Servicio de Publicaciones · 31 May 2024</span></li>
+      </ul>
+
+      <h3>Mixed reality in collaborative robots</h3>
+      <ul class="pubs">
+        <li><a href="https://www.sciencedirect.com/science/article/pii/S2212827124008941" target="_blank" rel="noopener"><strong>Programming Environment for cobots using MR technology</strong></a><br><span class="venue">17th CIRP Conference on Intelligent Computation in Manufacturing Engineering (CIRP ICME '23), Gulf of Naples, Italy · 12–14 July 2023</span></li>
+        <li><a href="https://www.sciencedirect.com/science/article/pii/S2212827124008953" target="_blank" rel="noopener"><strong>Toward safer Human-Robot collaboration in MR environment</strong></a><br><span class="venue">17th CIRP Conference on Intelligent Computation in Manufacturing Engineering (CIRP ICME '23), Gulf of Naples, Italy · 12–14 July 2023</span></li>
+        <li><a href="https://www.sciencedirect.com/science/article/pii/S2212827124008990" target="_blank" rel="noopener"><strong>Enhancing Manual Assembly Training using Mixed Reality and Virtual Sensors</strong></a><br><span class="venue">17th CIRP Conference on Intelligent Computation in Manufacturing Engineering (CIRP ICME '23), Gulf of Naples, Italy · 12–14 July 2023</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- AWARDS -->
+  <section id="awards">
+    <div class="wrap">
+      <h2>Awards</h2>
+      <div class="entry"><h4>Award for the Best Academic Record in Robotics Engineering</h4><div class="meta">University of Alicante · 2024</div></div>
+      <div class="entry"><h4>Extraordinary Award for Academic Performance</h4><div class="meta">Valencian Community · 2017</div></div>
+      <div class="entry"><h4>Second Prize in the ASFAMES XXIX Mathematical Tournament</h4><div class="meta">2017</div></div>
+    </div>
+  </section>
+
+  <!-- CV -->
+  <section id="cv">
+    <div class="wrap">
+      <h2>CV</h2>
+      <p style="margin-bottom:16px"><a class="btn" href="cv.pdf" download>Download CV (PDF)</a></p>
+      <!-- Put your CV at cv.pdf in the same folder as this file -->
+      <iframe class="cv-frame" src="cv.pdf" title="My CV"></iframe>
+    </div>
+  </section>
+
+  <!-- CLOSING VIDEO -->
+  <section class="outro">
+    <div class="wrap">
+      <video src="ar_training_pet/video3.mp4" autoplay loop muted playsinline preload="auto" aria-label="Animated robotic pet"></video>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">© 2026 Natalia Sempere</div></footer>
+
+<script>
+// Project tabs
+const tabs=document.querySelectorAll('.tab');
+tabs.forEach(t=>t.addEventListener('click',()=>{
+  tabs.forEach(x=>x.setAttribute('aria-selected',x===t));
+  document.querySelectorAll('#projects .panel').forEach(p=>p.hidden=p.id!==t.dataset.target);
+}));
+
+// Highlight current menu item while scrolling
+const links=document.querySelectorAll('.menu a');
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting)links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id));
+}),{rootMargin:'-40% 0px -55% 0px'});
+document.querySelectorAll('main section').forEach(s=>io.observe(s));
+
+// Media carousels: videos play (muted, looped) only while the project is hovered or focused
+const touchOnly=window.matchMedia('(hover: none)').matches;
+const carousels=document.querySelectorAll('.carousel');
+function syncVideos(){
+  carousels.forEach(c=>{
+    const active=c.offsetParent!==null&&(c._hover||c._focus||(touchOnly&&c._inView));
+    c.querySelectorAll('video').forEach(v=>{
+      if(active&&v.classList.contains('on')){v.play().catch(()=>{})}else{v.pause()}
+    });
+  });
+}
+carousels.forEach(c=>{
+  const slides=[...c.querySelectorAll('.slide')];
+  const count=c.querySelector('.car-count');
+  const card=c.closest('.card')||c;
+  let i=0;
+  if(slides.length<2)c.classList.add('single');
+  function show(n){
+    i=(n+slides.length)%slides.length;
+    slides.forEach((x,k)=>x.classList.toggle('on',k===i));
+    count.textContent=(i+1)+' / '+slides.length;
+    syncVideos();
+  }
+  c.querySelector('.car-prev').addEventListener('click',()=>show(i-1));
+  c.querySelector('.car-next').addEventListener('click',()=>show(i+1));
+  c.addEventListener('keydown',e=>{
+    if(e.key==='ArrowLeft')show(i-1);
+    if(e.key==='ArrowRight')show(i+1);
+  });
+  card.addEventListener('mouseenter',()=>{c._hover=true;syncVideos()});
+  card.addEventListener('mouseleave',()=>{c._hover=false;syncVideos()});
+  card.addEventListener('focusin',()=>{c._focus=true;syncVideos()});
+  card.addEventListener('focusout',()=>{c._focus=false;syncVideos()});
+  if(touchOnly){
+    new IntersectionObserver(es=>es.forEach(e=>{c._inView=e.isIntersecting;syncVideos()}),{threshold:.6}).observe(c);
+  }
+  show(0);
+});
+tabs.forEach(t=>t.addEventListener('click',()=>setTimeout(syncVideos,0)));
+</script>
+</body>
+</html>
